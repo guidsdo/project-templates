@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-tool",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Edit me",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "test": "karma start karma.conf.js"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.9.1",
+    "@types/node": "^14.14.6",
+    "jasmine": "^3.10.0",
+    "karma": "^6.3.4",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-nyan-reporter": "^0.2.5",
+    "karma-sourcemap-loader": "^0.3.8",
+    "karma-webpack": "^5.0.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.3.2",
+    "webpack": "^5.58.2"
+  }
+}
