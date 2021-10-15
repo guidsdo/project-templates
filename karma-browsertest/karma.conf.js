@@ -1,6 +1,6 @@
 module.exports = config => {
     config.set({
-        basePath: "",
+        basePath: "src",
         frameworks: ["jasmine", "webpack"],
         files: ["**/*/*.spec.ts"],
         preprocessors: {
@@ -21,7 +21,7 @@ module.exports = config => {
             },
             devtool: "inline-source-map"
         },
-        reporters: ["progress"],
+        reporters: ["spec"],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
