@@ -1,3 +1,3 @@
 import { render } from "./render";
 
-render();
+render("Hey");
