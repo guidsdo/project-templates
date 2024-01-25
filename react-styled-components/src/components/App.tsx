@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "../styling/GlobalStyle";
 import { CurrentTheme } from "../styling/Theme";
+
 import { GlobalCounter } from "./mobx-global-state/GlobalCounter";
 import { LocalCounter } from "./react-state/LocalCounterMobx";
 
