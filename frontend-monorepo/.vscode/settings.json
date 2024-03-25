@@ -1,0 +1,30 @@
+{
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "search.exclude": {
+    "node_modules": true,
+    "testResults": true,
+    "**/dist": true
+  },
+
+  // Code Formatting
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["typescriptreact", "typescript", "javascript", "javascriptreact"],
+
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+
+  // Gitlens
+  "git.autofetch": false,
+  "gitlens.blame.ignoreWhitespace": true,
+
+  // Typescript
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}

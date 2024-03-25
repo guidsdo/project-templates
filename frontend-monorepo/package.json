@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "scripts": {
+    "preinstall": "corepack enable && corepack install",
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.4"
+  },
+  "packageManager": "pnpm@8.12.0"
+}
