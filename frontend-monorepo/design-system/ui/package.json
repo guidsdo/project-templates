@@ -6,7 +6,9 @@
     "node": ">=18"
   },
   "exports": {
-    ".": "./src/index.ts"
+    "./*": {
+      "import": ["./src/*.tsx", "./src/*.ts", "./src/*/index.ts"]
+    }
   },
   "scripts": {
     "build": "tsc --build",

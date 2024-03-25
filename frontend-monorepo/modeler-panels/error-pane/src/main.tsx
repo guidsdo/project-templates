@@ -1,6 +1,6 @@
 import { configure } from "mobx";
 import { createRoot } from "react-dom/client";
-import { IconExample } from "@repo/ui";
+import { IconExample } from "@repo/ui/components/IconExample";
 
 configure({ enforceActions: "never" });
 
