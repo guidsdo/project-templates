@@ -1,0 +1,20 @@
+{
+	"name": "browser-esm-vite-react",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc --noEmit && vite build",
+		"ts:watch": "tsc --noEmit -w -p .",
+		"serve": "vite preview"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"monaco-editor": "^0.50.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"@types/react": "^17.0.39",
+		"@types/react-dom": "^17.0.11",
+		"@vitejs/plugin-react": "^1.1.4",
+		"typescript": "^5.4.5",
+		"vite": "^2.9.17"
+	}
+}
