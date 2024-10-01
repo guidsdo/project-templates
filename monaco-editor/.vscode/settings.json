@@ -11,14 +11,16 @@
   },
 
   // Code Formatting
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "eslint.validate": ["typescriptreact", "typescript", "javascript", "javascriptreact"],
-
   "[markdown]": {
     "files.trimTrailingWhitespace": false
   },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
 
   // Gitlens
   "git.autofetch": false,
