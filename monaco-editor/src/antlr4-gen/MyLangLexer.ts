@@ -1,8 +1,8 @@
-// Generated from SQL.g4 by ANTLR 4.13.1
+// Generated from MyLang.g4 by ANTLR 4.13.1
 
 import * as antlr from "antlr4ng";
 
-export class SQLLexer extends antlr.Lexer {
+export class MyLangLexer extends antlr.Lexer {
     public static readonly T__0 = 1;
     public static readonly T__1 = 2;
     public static readonly SELECT = 3;
@@ -23,33 +23,38 @@ export class SQLLexer extends antlr.Lexer {
 
     public constructor(input: antlr.CharStream) {
         super(input);
-        this.interpreter = new antlr.LexerATNSimulator(this, SQLLexer._ATN, SQLLexer.decisionsToDFA, new antlr.PredictionContextCache());
+        this.interpreter = new antlr.LexerATNSimulator(
+            this,
+            MyLangLexer._ATN,
+            MyLangLexer.decisionsToDFA,
+            new antlr.PredictionContextCache()
+        );
     }
 
     public get grammarFileName(): string {
-        return "SQL.g4";
+        return "MyLang.g4";
     }
 
     public get literalNames(): (string | null)[] {
-        return SQLLexer.literalNames;
+        return MyLangLexer.literalNames;
     }
     public get symbolicNames(): (string | null)[] {
-        return SQLLexer.symbolicNames;
+        return MyLangLexer.symbolicNames;
     }
     public get ruleNames(): string[] {
-        return SQLLexer.ruleNames;
+        return MyLangLexer.ruleNames;
     }
 
     public get serializedATN(): number[] {
-        return SQLLexer._serializedATN;
+        return MyLangLexer._serializedATN;
     }
 
     public get channelNames(): string[] {
-        return SQLLexer.channelNames;
+        return MyLangLexer.channelNames;
     }
 
     public get modeNames(): string[] {
-        return SQLLexer.modeNames;
+        return MyLangLexer.modeNames;
     }
 
     public static readonly _serializedATN: number[] = [
@@ -69,20 +74,20 @@ export class SQLLexer extends antlr.Lexer {
 
     private static __ATN: antlr.ATN;
     public static get _ATN(): antlr.ATN {
-        if (!SQLLexer.__ATN) {
-            SQLLexer.__ATN = new antlr.ATNDeserializer().deserialize(SQLLexer._serializedATN);
+        if (!MyLangLexer.__ATN) {
+            MyLangLexer.__ATN = new antlr.ATNDeserializer().deserialize(MyLangLexer._serializedATN);
         }
 
-        return SQLLexer.__ATN;
+        return MyLangLexer.__ATN;
     }
 
-    private static readonly vocabulary = new antlr.Vocabulary(SQLLexer.literalNames, SQLLexer.symbolicNames, []);
+    private static readonly vocabulary = new antlr.Vocabulary(MyLangLexer.literalNames, MyLangLexer.symbolicNames, []);
 
     public override get vocabulary(): antlr.Vocabulary {
-        return SQLLexer.vocabulary;
+        return MyLangLexer.vocabulary;
     }
 
-    private static readonly decisionsToDFA = SQLLexer._ATN.decisionToState.map(
+    private static readonly decisionsToDFA = MyLangLexer._ATN.decisionToState.map(
         (ds: antlr.DecisionState, index: number) => new antlr.DFA(ds, index)
     );
 }

@@ -1,5 +1,5 @@
-// SQL.g4
-grammar SQL;
+// MyLang.g4
+grammar MyLang;
 
 // Lexer rules
 SELECT: 'SELECT';

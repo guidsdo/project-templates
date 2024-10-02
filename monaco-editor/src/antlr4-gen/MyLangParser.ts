@@ -1,16 +1,16 @@
-// Generated from SQL.g4 by ANTLR 4.13.1
+// Generated from MyLang.g4 by ANTLR 4.13.1
 
 import * as antlr from "antlr4ng";
 
-import { SQLListener } from "./SQLListener.js";
-import { SQLVisitor } from "./SQLVisitor.js";
+import { MyLangListener } from "./MyLangListener.js";
+import { MyLangVisitor } from "./MyLangVisitor.js";
 
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // @ts-expect-error TS6196: This variable is intentionally unused by ANTLR
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 type int = number;
 
-export class SQLParser extends antlr.Parser {
+export class MyLangParser extends antlr.Parser {
     public static readonly T__0 = 1;
     public static readonly T__1 = 2;
     public static readonly SELECT = 3;
@@ -29,19 +29,19 @@ export class SQLParser extends antlr.Parser {
     public static readonly ruleNames = ["query", "columns", "table", "condition"];
 
     public get grammarFileName(): string {
-        return "SQL.g4";
+        return "MyLang.g4";
     }
     public get literalNames(): (string | null)[] {
-        return SQLParser.literalNames;
+        return MyLangParser.literalNames;
     }
     public get symbolicNames(): (string | null)[] {
-        return SQLParser.symbolicNames;
+        return MyLangParser.symbolicNames;
     }
     public get ruleNames(): string[] {
-        return SQLParser.ruleNames;
+        return MyLangParser.ruleNames;
     }
     public get serializedATN(): number[] {
-        return SQLParser._serializedATN;
+        return MyLangParser._serializedATN;
     }
 
     protected createFailedPredicateException(predicate?: string, message?: string): antlr.FailedPredicateException {
@@ -50,21 +50,26 @@ export class SQLParser extends antlr.Parser {
 
     public constructor(input: antlr.TokenStream) {
         super(input);
-        this.interpreter = new antlr.ParserATNSimulator(this, SQLParser._ATN, SQLParser.decisionsToDFA, new antlr.PredictionContextCache());
+        this.interpreter = new antlr.ParserATNSimulator(
+            this,
+            MyLangParser._ATN,
+            MyLangParser.decisionsToDFA,
+            new antlr.PredictionContextCache()
+        );
     }
     public query(): QueryContext {
         let localContext = new QueryContext(this.context, this.state);
-        this.enterRule(localContext, 0, SQLParser.RULE_query);
+        this.enterRule(localContext, 0, MyLangParser.RULE_query);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
                 this.state = 8;
-                this.match(SQLParser.SELECT);
+                this.match(MyLangParser.SELECT);
                 this.state = 9;
                 this.columns();
                 this.state = 10;
-                this.match(SQLParser.FROM);
+                this.match(MyLangParser.FROM);
                 this.state = 11;
                 this.table();
                 this.state = 14;
@@ -73,7 +78,7 @@ export class SQLParser extends antlr.Parser {
                 if (_la === 5) {
                     {
                         this.state = 12;
-                        this.match(SQLParser.WHERE);
+                        this.match(MyLangParser.WHERE);
                         this.state = 13;
                         this.condition();
                     }
@@ -93,13 +98,13 @@ export class SQLParser extends antlr.Parser {
     }
     public columns(): ColumnsContext {
         let localContext = new ColumnsContext(this.context, this.state);
-        this.enterRule(localContext, 2, SQLParser.RULE_columns);
+        this.enterRule(localContext, 2, MyLangParser.RULE_columns);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
                 this.state = 16;
-                this.match(SQLParser.IDENTIFIER);
+                this.match(MyLangParser.IDENTIFIER);
                 this.state = 21;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -107,9 +112,9 @@ export class SQLParser extends antlr.Parser {
                     {
                         {
                             this.state = 17;
-                            this.match(SQLParser.T__0);
+                            this.match(MyLangParser.T__0);
                             this.state = 18;
-                            this.match(SQLParser.IDENTIFIER);
+                            this.match(MyLangParser.IDENTIFIER);
                         }
                     }
                     this.state = 23;
@@ -131,12 +136,12 @@ export class SQLParser extends antlr.Parser {
     }
     public table(): TableContext {
         let localContext = new TableContext(this.context, this.state);
-        this.enterRule(localContext, 4, SQLParser.RULE_table);
+        this.enterRule(localContext, 4, MyLangParser.RULE_table);
         try {
             this.enterOuterAlt(localContext, 1);
             {
                 this.state = 24;
-                this.match(SQLParser.IDENTIFIER);
+                this.match(MyLangParser.IDENTIFIER);
             }
         } catch (re) {
             if (re instanceof antlr.RecognitionException) {
@@ -152,16 +157,16 @@ export class SQLParser extends antlr.Parser {
     }
     public condition(): ConditionContext {
         let localContext = new ConditionContext(this.context, this.state);
-        this.enterRule(localContext, 6, SQLParser.RULE_condition);
+        this.enterRule(localContext, 6, MyLangParser.RULE_condition);
         try {
             this.enterOuterAlt(localContext, 1);
             {
                 this.state = 26;
-                this.match(SQLParser.IDENTIFIER);
+                this.match(MyLangParser.IDENTIFIER);
                 this.state = 27;
-                this.match(SQLParser.T__1);
+                this.match(MyLangParser.T__1);
                 this.state = 28;
-                this.match(SQLParser.IDENTIFIER);
+                this.match(MyLangParser.IDENTIFIER);
             }
         } catch (re) {
             if (re instanceof antlr.RecognitionException) {
@@ -188,20 +193,20 @@ export class SQLParser extends antlr.Parser {
 
     private static __ATN: antlr.ATN;
     public static get _ATN(): antlr.ATN {
-        if (!SQLParser.__ATN) {
-            SQLParser.__ATN = new antlr.ATNDeserializer().deserialize(SQLParser._serializedATN);
+        if (!MyLangParser.__ATN) {
+            MyLangParser.__ATN = new antlr.ATNDeserializer().deserialize(MyLangParser._serializedATN);
         }
 
-        return SQLParser.__ATN;
+        return MyLangParser.__ATN;
     }
 
-    private static readonly vocabulary = new antlr.Vocabulary(SQLParser.literalNames, SQLParser.symbolicNames, []);
+    private static readonly vocabulary = new antlr.Vocabulary(MyLangParser.literalNames, MyLangParser.symbolicNames, []);
 
     public override get vocabulary(): antlr.Vocabulary {
-        return SQLParser.vocabulary;
+        return MyLangParser.vocabulary;
     }
 
-    private static readonly decisionsToDFA = SQLParser._ATN.decisionToState.map(
+    private static readonly decisionsToDFA = MyLangParser._ATN.decisionToState.map(
         (ds: antlr.DecisionState, index: number) => new antlr.DFA(ds, index)
     );
 }
@@ -211,37 +216,37 @@ export class QueryContext extends antlr.ParserRuleContext {
         super(parent, invokingState);
     }
     public SELECT(): antlr.TerminalNode {
-        return this.getToken(SQLParser.SELECT, 0)!;
+        return this.getToken(MyLangParser.SELECT, 0)!;
     }
     public columns(): ColumnsContext {
         return this.getRuleContext(0, ColumnsContext)!;
     }
     public FROM(): antlr.TerminalNode {
-        return this.getToken(SQLParser.FROM, 0)!;
+        return this.getToken(MyLangParser.FROM, 0)!;
     }
     public table(): TableContext {
         return this.getRuleContext(0, TableContext)!;
     }
     public WHERE(): antlr.TerminalNode | null {
-        return this.getToken(SQLParser.WHERE, 0);
+        return this.getToken(MyLangParser.WHERE, 0);
     }
     public condition(): ConditionContext | null {
         return this.getRuleContext(0, ConditionContext);
     }
     public override get ruleIndex(): number {
-        return SQLParser.RULE_query;
+        return MyLangParser.RULE_query;
     }
-    public override enterRule(listener: SQLListener): void {
+    public override enterRule(listener: MyLangListener): void {
         if (listener.enterQuery) {
             listener.enterQuery(this);
         }
     }
-    public override exitRule(listener: SQLListener): void {
+    public override exitRule(listener: MyLangListener): void {
         if (listener.exitQuery) {
             listener.exitQuery(this);
         }
     }
-    public override accept<Result>(visitor: SQLVisitor<Result>): Result | null {
+    public override accept<Result>(visitor: MyLangVisitor<Result>): Result | null {
         if (visitor.visitQuery) {
             return visitor.visitQuery(this);
         } else {
@@ -258,25 +263,25 @@ export class ColumnsContext extends antlr.ParserRuleContext {
     public IDENTIFIER(i: number): antlr.TerminalNode | null;
     public IDENTIFIER(i?: number): antlr.TerminalNode | null | antlr.TerminalNode[] {
         if (i === undefined) {
-            return this.getTokens(SQLParser.IDENTIFIER);
+            return this.getTokens(MyLangParser.IDENTIFIER);
         } else {
-            return this.getToken(SQLParser.IDENTIFIER, i);
+            return this.getToken(MyLangParser.IDENTIFIER, i);
         }
     }
     public override get ruleIndex(): number {
-        return SQLParser.RULE_columns;
+        return MyLangParser.RULE_columns;
     }
-    public override enterRule(listener: SQLListener): void {
+    public override enterRule(listener: MyLangListener): void {
         if (listener.enterColumns) {
             listener.enterColumns(this);
         }
     }
-    public override exitRule(listener: SQLListener): void {
+    public override exitRule(listener: MyLangListener): void {
         if (listener.exitColumns) {
             listener.exitColumns(this);
         }
     }
-    public override accept<Result>(visitor: SQLVisitor<Result>): Result | null {
+    public override accept<Result>(visitor: MyLangVisitor<Result>): Result | null {
         if (visitor.visitColumns) {
             return visitor.visitColumns(this);
         } else {
@@ -290,22 +295,22 @@ export class TableContext extends antlr.ParserRuleContext {
         super(parent, invokingState);
     }
     public IDENTIFIER(): antlr.TerminalNode {
-        return this.getToken(SQLParser.IDENTIFIER, 0)!;
+        return this.getToken(MyLangParser.IDENTIFIER, 0)!;
     }
     public override get ruleIndex(): number {
-        return SQLParser.RULE_table;
+        return MyLangParser.RULE_table;
     }
-    public override enterRule(listener: SQLListener): void {
+    public override enterRule(listener: MyLangListener): void {
         if (listener.enterTable) {
             listener.enterTable(this);
         }
     }
-    public override exitRule(listener: SQLListener): void {
+    public override exitRule(listener: MyLangListener): void {
         if (listener.exitTable) {
             listener.exitTable(this);
         }
     }
-    public override accept<Result>(visitor: SQLVisitor<Result>): Result | null {
+    public override accept<Result>(visitor: MyLangVisitor<Result>): Result | null {
         if (visitor.visitTable) {
             return visitor.visitTable(this);
         } else {
@@ -322,25 +327,25 @@ export class ConditionContext extends antlr.ParserRuleContext {
     public IDENTIFIER(i: number): antlr.TerminalNode | null;
     public IDENTIFIER(i?: number): antlr.TerminalNode | null | antlr.TerminalNode[] {
         if (i === undefined) {
-            return this.getTokens(SQLParser.IDENTIFIER);
+            return this.getTokens(MyLangParser.IDENTIFIER);
         } else {
-            return this.getToken(SQLParser.IDENTIFIER, i);
+            return this.getToken(MyLangParser.IDENTIFIER, i);
         }
     }
     public override get ruleIndex(): number {
-        return SQLParser.RULE_condition;
+        return MyLangParser.RULE_condition;
     }
-    public override enterRule(listener: SQLListener): void {
+    public override enterRule(listener: MyLangListener): void {
         if (listener.enterCondition) {
             listener.enterCondition(this);
         }
     }
-    public override exitRule(listener: SQLListener): void {
+    public override exitRule(listener: MyLangListener): void {
         if (listener.exitCondition) {
             listener.exitCondition(this);
         }
     }
-    public override accept<Result>(visitor: SQLVisitor<Result>): Result | null {
+    public override accept<Result>(visitor: MyLangVisitor<Result>): Result | null {
         if (visitor.visitCondition) {
             return visitor.visitCondition(this);
         } else {

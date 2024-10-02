@@ -10,7 +10,7 @@
     "build": "tsc --noEmit && vite build",
     "ts:watch": "tsc --noEmit -w -p .",
     "serve": "vite preview",
-    "antlr": "antlr4ng -Dlanguage=TypeScript -o src/antlr4-gen/ -visitor -listener -Xexact-output-dir SQL.g4"
+    "antlr": "antlr4ng -Dlanguage=TypeScript -o src/antlr4-gen/ -visitor -listener -Xexact-output-dir MyLang.g4"
   },
   "dependencies": {
     "antlr4ng-cli": "^2.0.0",
