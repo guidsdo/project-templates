@@ -3,10 +3,8 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
-import { QueryContext } from "./MyLangParser.js";
-import { ColumnsContext } from "./MyLangParser.js";
-import { TableContext } from "./MyLangParser.js";
-import { ConditionContext } from "./MyLangParser.js";
+import { InitContext } from "./MyLangParser.js";
+import { ValueContext } from "./MyLangParser.js";
 
 
 /**
@@ -18,28 +16,16 @@ import { ConditionContext } from "./MyLangParser.js";
  */
 export class MyLangVisitor<Result> extends AbstractParseTreeVisitor<Result> {
     /**
-     * Visit a parse tree produced by `MyLangParser.query`.
+     * Visit a parse tree produced by `MyLangParser.init`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitQuery?: (ctx: QueryContext) => Result;
+    visitInit?: (ctx: InitContext) => Result;
     /**
-     * Visit a parse tree produced by `MyLangParser.columns`.
+     * Visit a parse tree produced by `MyLangParser.value`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumns?: (ctx: ColumnsContext) => Result;
-    /**
-     * Visit a parse tree produced by `MyLangParser.table`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitTable?: (ctx: TableContext) => Result;
-    /**
-     * Visit a parse tree produced by `MyLangParser.condition`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCondition?: (ctx: ConditionContext) => Result;
+    visitValue?: (ctx: ValueContext) => Result;
 }
 

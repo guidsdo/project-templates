@@ -2,12 +2,8 @@
 
 import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from "antlr4ng";
 
-
-import { QueryContext } from "./MyLangParser.js";
-import { ColumnsContext } from "./MyLangParser.js";
-import { TableContext } from "./MyLangParser.js";
-import { ConditionContext } from "./MyLangParser.js";
-
+import { InitContext } from "./MyLangParser.js";
+import { ValueContext } from "./MyLangParser.js";
 
 /**
  * This interface defines a complete listener for a parse tree produced by
@@ -15,49 +11,37 @@ import { ConditionContext } from "./MyLangParser.js";
  */
 export class MyLangListener implements ParseTreeListener {
     /**
-     * Enter a parse tree produced by `MyLangParser.query`.
+     * Enter a parse tree produced by `MyLangParser.init`.
      * @param ctx the parse tree
      */
-    enterQuery?: (ctx: QueryContext) => void;
+    enterInit(ctx: InitContext) {
+        console.log(`"`);
+    }
     /**
-     * Exit a parse tree produced by `MyLangParser.query`.
+     * Exit a parse tree produced by `MyLangParser.init`.
      * @param ctx the parse tree
      */
-    exitQuery?: (ctx: QueryContext) => void;
+    exitInit(ctx: InitContext) {
+        console.log(`"`);
+    }
     /**
-     * Enter a parse tree produced by `MyLangParser.columns`.
+     * Enter a parse tree produced by `MyLangParser.value`.
      * @param ctx the parse tree
      */
-    enterColumns?: (ctx: ColumnsContext) => void;
+    enterValue(ctx: ValueContext) {
+        const numberText = ctx.INT()?.getText() ?? "";
+        // Assumes no nested array initializers
+        const value = Number.parseInt(numberText, 16);
+        console.log(`\\u${value}04x`);
+    }
     /**
-     * Exit a parse tree produced by `MyLangParser.columns`.
+     * Exit a parse tree produced by `MyLangParser.value`.
      * @param ctx the parse tree
      */
-    exitColumns?: (ctx: ColumnsContext) => void;
-    /**
-     * Enter a parse tree produced by `MyLangParser.table`.
-     * @param ctx the parse tree
-     */
-    enterTable?: (ctx: TableContext) => void;
-    /**
-     * Exit a parse tree produced by `MyLangParser.table`.
-     * @param ctx the parse tree
-     */
-    exitTable?: (ctx: TableContext) => void;
-    /**
-     * Enter a parse tree produced by `MyLangParser.condition`.
-     * @param ctx the parse tree
-     */
-    enterCondition?: (ctx: ConditionContext) => void;
-    /**
-     * Exit a parse tree produced by `MyLangParser.condition`.
-     * @param ctx the parse tree
-     */
-    exitCondition?: (ctx: ConditionContext) => void;
+    exitValue?: (ctx: ValueContext) => void;
 
     visitTerminal(node: TerminalNode): void {}
     visitErrorNode(node: ErrorNode): void {}
     enterEveryRule(node: ParserRuleContext): void {}
     exitEveryRule(node: ParserRuleContext): void {}
 }
-

@@ -8,7 +8,10 @@ import {
     ATNSimulator,
     Lexer,
     Parser,
-    TokenStream
+    TokenStream,
+    ParserRuleContext,
+    ParseTreeWalker,
+    ParseTreeListener
 } from "antlr4ng";
 import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
@@ -22,12 +25,13 @@ type Props<T extends Parser> = {
     lexerClass: new (input: CharStream) => Lexer;
     parserClass: new (input: TokenStream) => T;
     topLevelRule: FunctionKeys<T>;
+    listenerClass?: new () => ParseTreeListener;
 };
 
-export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevelRule }: Props<T>) {
+export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevelRule, listenerClass }: Props<T>) {
     const [inputText, setInputText] = useState("");
 
-    const { errorListener } = useMemo(() => {
+    const { errorListener, parserRuleContext, parser } = useMemo(() => {
         const inputStream = CharStream.fromString(inputText);
         const lexer = new lexerClass(inputStream);
         const tokenStream = new CommonTokenStream(lexer);
@@ -41,9 +45,16 @@ export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevel
         parser.removeErrorListeners();
         parser.addErrorListener(errorListener);
 
-        (parser[topLevelRule] as Function)();
+        const parserRuleContext = (parser[topLevelRule] as Function)() as ParserRuleContext;
 
-        return { errorListener };
+        if (listenerClass) {
+            // Create a generic parse tree walker that can trigger callbacks
+            const walker = new ParseTreeWalker();
+            // Walk the tree created during the parse, trigger callbacks
+            walker.walk(new listenerClass(), parserRuleContext);
+        }
+
+        return { errorListener, parserRuleContext, parser };
     }, [inputText]);
 
     const onChange = useCallback((newValue: string) => {
@@ -57,6 +68,7 @@ export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevel
                 <MonacoEditor onChange={onChange}></MonacoEditor>
             </EditorWrapper>
             <ErrorsWrapper>
+                <Pre>{parserRuleContext.toStringTree(parser)}</Pre>
                 <table>
                     <thead>
                         <tr>
@@ -65,18 +77,28 @@ export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevel
                             <th>Message</th>
                         </tr>
                     </thead>
-                    {errorListener.errors.map(({ type, line, column, message }) => (
-                        <tr>
-                            <td>{line}</td>
-                            <td>{column}</td>
-                            <td>{message}</td>
-                        </tr>
-                    ))}
+                    <tbody>
+                        {errorListener.errors.map(({ type, line, column, message }, i) => (
+                            <tr key={i}>
+                                <td>{line}</td>
+                                <td>{column}</td>
+                                <td>{message}</td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             </ErrorsWrapper>
         </Wrapper>
     );
 }
+
+const Pre = styled.pre`
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: auto;
+`;
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -85,7 +107,8 @@ const Wrapper = styled.div`
 `;
 
 const ErrorsWrapper = styled.div`
-    margin-top: 10px;
+    padding-top: 10px;
+    height: 30%;
 `;
 
 const EditorWrapper = styled.div`
