@@ -20,6 +20,14 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[antlr]": {
+    "editor.formatOnSave": false
+  },
+
+  "antlr4.generation": {
+    "mode": "none"
+  },
+
   "editor.formatOnSave": true,
 
   // Gitlens
