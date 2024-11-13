@@ -29,6 +29,7 @@ type Props<T extends Parser> = {
 };
 
 export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevelRule, listenerClass }: Props<T>) {
+    const language = lexerClass.name.split("Lexer")[0];
     const [inputText, setInputText] = useState("");
 
     const { errorListener, parserRuleContext, parser } = useMemo(() => {
@@ -65,7 +66,7 @@ export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevel
     return (
         <Wrapper>
             <EditorWrapper>
-                <MonacoEditor onChange={onChange}></MonacoEditor>
+                <MonacoEditor language={language} onChange={onChange}></MonacoEditor>
             </EditorWrapper>
             <ErrorsWrapper>
                 <Pre>{parserRuleContext.toStringTree(parser)}</Pre>

@@ -1,15 +1,15 @@
-/** Grammars always start with a grammar header. This grammar is called ArrayInit and must match the
- * filename: ArrayInit.g4
- */
+// MyLang.g4
 grammar MyLang;
 
-/** A rule called init that matches comma-separated values between {...}. */
-init:
-	'{' value (',' value)* '}'; // must match at least one value
+// Lexer rules
+SELECT: 'SELECT';
+FROM: 'FROM';
+WHERE: 'WHERE';
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
+WS: [ \t\r\n]+ -> skip;
 
-/** A value can be either a nested array/struct or a simple integer (INT) */
-value: init | INT;
-
-// parser rules start with lowercase letters, lexer rules with uppercase
-INT: [0-9]+; // Define token INT as one or more digits
-WS: [ \t\r\n]+ -> skip; // Define whitespace rule, toss it out
+// Parser rules
+query: SELECT columns FROM table (WHERE condition)?;
+columns: IDENTIFIER (',' IDENTIFIER)*;
+table: IDENTIFIER;
+condition: IDENTIFIER '=' IDENTIFIER;

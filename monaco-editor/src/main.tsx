@@ -7,6 +7,6 @@ import { MyLangListener } from "./antlr4-gen/MyLangListener";
 
 createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <CodeEditor lexerClass={MyLangLexer} parserClass={MyLangParser} listenerClass={MyLangListener} topLevelRule={"init"} />
+        <CodeEditor lexerClass={MyLangLexer} parserClass={MyLangParser} listenerClass={MyLangListener} topLevelRule={"query"} />
     </React.StrictMode>
 );

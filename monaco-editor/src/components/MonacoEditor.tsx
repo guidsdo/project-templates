@@ -5,7 +5,7 @@ import styled from "styled-components";
 type Props = {
     onChange: (value: string) => void;
     children?: string;
-    language?: string;
+    language: string;
 };
 
 export const MonacoEditor: FC<Props> = ({ onChange, children, language }) => {

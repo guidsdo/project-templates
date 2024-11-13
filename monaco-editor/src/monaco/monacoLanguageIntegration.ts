@@ -1,13 +1,13 @@
 import monaco from "./monacoImportWrapper";
 
 monaco.languages.register({
-    id: "bla",
-    extensions: [".bla"],
-    aliases: ["bla"],
-    mimetypes: ["text/oql"]
+    id: "mylang",
+    extensions: [".mylang"],
+    aliases: ["MyLang"],
+    mimetypes: ["text/mylang"]
 });
 
-monaco.languages.setLanguageConfiguration("bla", {
+monaco.languages.setLanguageConfiguration("mylang", {
     brackets: [["(", ")"]],
     autoClosingPairs: [
         { open: "(", close: ")" },
@@ -21,14 +21,14 @@ monaco.languages.setLanguageConfiguration("bla", {
     ]
 });
 
-monaco.languages.setMonarchTokensProvider("bla", {
+monaco.languages.setMonarchTokensProvider("mylang", {
     defaultToken: "invalid",
-    tokenPostfix: ".bla",
+    tokenPostfix: ".mylang",
     ignoreCase: true,
 
     brackets: [{ open: "(", close: ")", token: "delimiter.parenthesis" }],
 
-    keywords: [],
+    keywords: ["SELECT", "FROM"],
     builtinFunctions: [],
     operators: [],
     tokenizer: {
@@ -44,12 +44,10 @@ monaco.languages.setMonarchTokensProvider("bla", {
                     cases: {
                         "@keywords": "keyword",
                         "@builtinFunctions": "predefined",
-                        "@default": { token: "identifier", next: "@afterPathIdentifierPart" }
+                        "@default": { token: "identifier" }
                     }
                 }
-            ],
-            { include: "@variable" },
-            { include: "@pathIdentifierPart" }
+            ]
         ],
         whitespace: [[/[ \t\r\n\u000c]+/, "white"]],
         numbers: [[/[[+-]*\d*(\.\d*)?]/, "number"]],
