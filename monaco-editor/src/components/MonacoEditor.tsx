@@ -4,15 +4,13 @@ import styled from "styled-components";
 
 type Props = {
     onChange: (value: string) => void;
-    children?: string;
+    initialValue?: string;
     language: string;
 };
 
-export const MonacoEditor: FC<Props> = ({ onChange, children, language }) => {
+export const MonacoEditor: FC<Props> = ({ onChange, initialValue, language }) => {
     const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null);
     const monacoElement = useRef(null);
-
-    useEffect(() => editor?.setValue(children ?? ""), [children]);
 
     useEffect(() => {
         if (monacoElement) {
@@ -20,7 +18,7 @@ export const MonacoEditor: FC<Props> = ({ onChange, children, language }) => {
                 if (editor) return editor;
 
                 const newEditor = monaco.editor.create(monacoElement.current!, {
-                    value: children ?? "",
+                    value: initialValue ?? "",
                     language,
                     automaticLayout: true
                 });

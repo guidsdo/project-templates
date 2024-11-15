@@ -29,8 +29,8 @@ type Props<T extends Parser> = {
 };
 
 export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevelRule, listenerClass }: Props<T>) {
-    const language = lexerClass.name.split("Lexer")[0];
-    const [inputText, setInputText] = useState("");
+    const language = lexerClass.name.split("Lexer")[0].toLocaleLowerCase();
+    const [inputText, setInputText] = useState("SELECT * FROM tableName;");
 
     const { errorListener, parserRuleContext, parser } = useMemo(() => {
         const inputStream = CharStream.fromString(inputText);
@@ -66,7 +66,7 @@ export function CodeEditor<T extends Parser>({ lexerClass, parserClass, topLevel
     return (
         <Wrapper>
             <EditorWrapper>
-                <MonacoEditor language={language} onChange={onChange}></MonacoEditor>
+                <MonacoEditor language={language} onChange={onChange} initialValue={inputText} />
             </EditorWrapper>
             <ErrorsWrapper>
                 <Pre>{parserRuleContext.toStringTree(parser)}</Pre>
