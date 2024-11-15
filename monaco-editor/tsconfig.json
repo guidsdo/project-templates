@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
+    "types": ["vite/client"],
     "sourceMap": true,
     "esModuleInterop": true,
     "noEmit": true,
