@@ -6,11 +6,12 @@ const messageReader = new BrowserMessageReader(self);
 const messageWriter = new BrowserMessageWriter(self);
 
 const connection = createConnection(messageReader, messageWriter);
-self.postMessage("Done");
 
 const documents = new Map<string, TextDocument>();
 
-connection.onInitialize(x => {
+connection.onInitialize(async x => {
+    console.log("onInitialize", x);
+
     return {
         capabilities: {
             textDocumentSync: 1,
@@ -23,6 +24,8 @@ connection.onInitialize(x => {
 });
 
 connection.onDidOpenTextDocument(params => {
+    console.log("onDidOpenTextDocument", params);
+
     const document = params.textDocument;
     console.log("On did open", document.uri);
     documents.set(document.uri, TextDocument.create(document.uri, document.languageId, document.version, document.text));

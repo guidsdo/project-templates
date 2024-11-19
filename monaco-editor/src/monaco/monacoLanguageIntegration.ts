@@ -1,12 +1,8 @@
 import monaco from "./monacoImportWrapper";
 import MyLangWorker from "../lsp/MyLangWorker?worker";
-import {
-    BrowserMessageReader,
-    BrowserMessageWriter,
-    createMessageConnection,
-    MessageConnection
-} from "vscode-languageserver-protocol/browser";
+import { BrowserMessageReader, BrowserMessageWriter } from "vscode-languageserver-protocol/browser";
 import * as lsp from "vscode-languageserver-protocol";
+import { createLspClientConnection, LspClientConnection } from "../lsp/LspClientConnection";
 
 export function setupStaticOqlConfiguation() {
     monaco.languages.register({
@@ -71,37 +67,36 @@ export function setupStaticOqlConfiguation() {
 export async function startLanguageServer() {
     // Create a Web Worker
     const worker = new MyLangWorker();
-    await new Promise(r => (worker.onmessage = r));
 
     // Create a connection to the worker
     const reader = new BrowserMessageReader(worker);
     const writer = new BrowserMessageWriter(worker);
 
-    const connection: MessageConnection = createMessageConnection(reader, writer, {
-        error: () => console.error,
-        warn: () => console.warn,
-        info: () => console.info,
-        log: () => console.log
-    });
+    const errorCatch = (e: Error, message?: lsp.Message, count?: number) => {
+        console.log("Client error: ", e, message, count);
+    };
+
+    const connection = createLspClientConnection(reader, writer, errorCatch, () => {}, {});
 
     connection.listen();
+
+    await connection.initialize({ processId: 1, capabilities: {}, rootUri: null });
+
     return connection;
 }
 
-export async function setupLanguageProviders(connection: MessageConnection) {
+export async function setupLanguageProviders(connection: LspClientConnection) {
     // We assume that there is only one model open here
     const inMemoryModel = monaco.editor.getModels().at(0)!;
 
-    const didOpenTextDocumentParams: lsp.DidOpenTextDocumentParams = {
+    await connection.sendNotification(lsp.DidOpenTextDocumentNotification.type, {
         textDocument: {
             uri: inMemoryModel.uri.toString(),
             languageId: inMemoryModel.getLanguageId(),
             version: inMemoryModel.getVersionId(),
             text: inMemoryModel.getValue()
         }
-    };
-
-    await connection.sendNotification("textDocument/didOpen", didOpenTextDocumentParams);
+    });
 
     monaco.languages.registerCompletionItemProvider("mylang", {
         provideCompletionItems: async (model, position) => {
